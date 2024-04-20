@@ -12,10 +12,6 @@ app.use(require("cors")());
 
 app.get("/seed", seed);
 app.get("/transactions", getTransactions);
-app.get("/", async (req: Request, res: Response) => {
-  const count = await prisma.transaction.count();
-  res.status(201).json({count});
-});
 app.use(apiError);
 
 app
@@ -23,6 +19,5 @@ app
     console.log("Server running at PORT: ", PORT);
   })
   .on("error", (error) => {
-    console.log('olá?')
     throw new Error(error.message);
   });

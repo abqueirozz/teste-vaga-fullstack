@@ -46,7 +46,6 @@ export class CSV {
     if (this.isValidCPFOrCNPJ(nrCpfCnpj)) return false;
 
     if (this.validateMora(vlMora, vlTotal, vlDescon)) {
-      console.log("deveria dar um throw error");
       return false;
     }
 

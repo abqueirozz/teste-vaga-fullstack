@@ -11,7 +11,6 @@ export type TransactionParams = {
 const transaction = new TransactionService();
 
 export async function getTransactions(req: Request, res: Response) {
-  console.log('path', req.url)
   const params = req.query as TransactionParams;
 
   const data = await transaction.getTransactions(params);

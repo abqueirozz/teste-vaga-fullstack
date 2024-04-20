@@ -1,0 +1,134 @@
+openapi: 3.0.0
+info:
+  title: Kronoos-api
+  description: Seed your db and request the transactions with filters.
+  version: 1.0.0
+servers:
+  - url: http://localhost:{port}
+    variables:
+      port:
+        enum:
+          - '4000'
+          - '3000'
+        default: '3000'
+    description: local server
+paths:
+  /transactions:
+    get:
+      summary: Populate the DB.
+      parameters:
+      - in: query
+        name: page
+        schema:
+          type: integer
+        description: The number of page seted.
+      - in: query
+        name: filter
+        schema:
+          type: object
+          properties:
+            nrCpfCnpj:
+              type: string
+            nrProposta: 
+              type: string
+        description: Filters by columns
+      responses:
+        '200':  
+          $ref: '#/components/responses/Transactions'
+          
+        '500':
+          $ref: '#/components/responses/Failure'
+components:
+  schemas:
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+        status: 
+          type: string
+        title:
+          type: string
+        detail:
+          type: string
+    Transaction:
+      type: object
+      properties:
+        id:
+          type: string
+        nrAgencia: 
+          type: string
+        cdClient: 
+          type: string
+        nmClient: 
+          type: string
+        nrCpfCnpj: 
+          type: string
+        nrContrato: 
+          type: string
+        dtContrato: 
+          type: string
+        qtPrestacoes: 
+          type: string
+        vlTotal: 
+          type: string
+        cdProduto: 
+          type: string
+        dsProduto: 
+          type: string
+        cdCarteira: 
+          type: string
+        dsCarteira: 
+          type: string
+        nrProposta: 
+          type: string
+        nrPresta: 
+          type: string
+        tpPresta: 
+          type: string
+        nrSeqPre: 
+          type: string
+        dtVctPre: 
+          type: string
+        vlPresta: 
+          type: string
+        vlMora: 
+          type: string
+        vlMulta: 
+          type: string
+        vlOutAcr: 
+          type: string
+        vlIof: 
+          type: string
+        vlDescon: 
+          type: string
+        vlAtual: 
+          type: string
+        idSituac: 
+          type: string
+        idSitVen: 
+          type: string
+      required:  
+        - id
+  responses:
+    Transactions:
+      description: array of transiction
+      content:
+        application/json:
+          schema: 
+            type: object
+            properties: 
+              data:
+                type: array
+                items: 
+                  $ref: '#/components/schemas/Transaction'
+    Failure:
+      description: failure request
+      content:
+        application/json:
+          schema: 
+            $ref: '#/components/schemas/Error'
+
+
+      
+  

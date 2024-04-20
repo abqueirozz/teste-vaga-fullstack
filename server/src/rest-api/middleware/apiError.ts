@@ -6,7 +6,6 @@ export const apiError = (
   res: Response,
   next: NextFunction
 ) => {
-  console.log('aqui');
   let httpError: HTTPError;
   if (res.headersSent) {
     return next(err);
