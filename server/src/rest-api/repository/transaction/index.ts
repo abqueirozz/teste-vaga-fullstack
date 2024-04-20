@@ -3,22 +3,22 @@ import { prisma } from "../../../lib/prisma";
 import { CSV, HTTPError, getErrorMessage } from "../../../utils";
 import { TransactionParams } from "../../domain";
 
-const PAGESIZE = 10;
+const PAGESIZE = 100;
 
 export class TransactionRepository {
   constructor() {}
 
   async getTransactions(params: TransactionParams) {
     try {
-      const { filter, ...page } = params;
+      const { filter, page } = params;
       const where = buildFilter(filter);
 
-      const data = await prisma.transaction.findMany({
+      const [result, counts] = await prisma.transaction.findManyAndCount({
         where,
-        skip: skip(page.number),
+        skip: skip(page),
         take: PAGESIZE,
       });
-      return data;
+      return { data: result, total: counts };
     } catch (error) {
       const message = getErrorMessage(error);
 

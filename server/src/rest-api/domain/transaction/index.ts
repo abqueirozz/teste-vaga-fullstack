@@ -2,8 +2,7 @@ import { Request, Response } from "express";
 import { TransactionService } from "../../service";
 
 export type TransactionParams = {
-  size?: string;
-  number?: string;
+  page?: string;
   filter?: {
     nrProposta?: string;
     nrCpfCnpj?: string;
@@ -12,6 +11,7 @@ export type TransactionParams = {
 const transaction = new TransactionService();
 
 export async function getTransactions(req: Request, res: Response) {
+  console.log('path', req.url)
   const params = req.query as TransactionParams;
 
   const data = await transaction.getTransactions(params);
@@ -19,8 +19,8 @@ export async function getTransactions(req: Request, res: Response) {
   res.status(200).json(data);
 }
 
-export async function seed(req: Request, res: Response) {
-  const createdData = await transaction.seed();
+export function seed(req: Request, res: Response) {
+  const createdData = transaction.seed();
 
   if (!createdData) {
     res.status(200).send("Tabela já povoada");

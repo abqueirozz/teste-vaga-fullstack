@@ -6,13 +6,14 @@ export const apiError = (
   res: Response,
   next: NextFunction
 ) => {
+  console.log('aqui');
   let httpError: HTTPError;
   if (res.headersSent) {
     return next(err);
   }
   if (err instanceof HTTPError) {
     httpError = err;
-    //httpError.setResource(req.path);
+    httpError.setResource(req.path);
   } else {
     httpError = new HTTPError("InternalError", 500, req.path);
   }

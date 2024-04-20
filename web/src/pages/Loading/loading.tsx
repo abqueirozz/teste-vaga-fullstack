@@ -1,5 +1,5 @@
 import icon from '../../assets/icon1.svg'
-import { useSeed, useDelay } from '../../hooks'
+import { useSeed, useDelay, useErrorHandler } from '../../hooks'
 import { useNavigate } from 'react-router-dom'
 import { useEffect } from 'react'
 
@@ -8,13 +8,14 @@ import * as Styled from './loading.styles'
 export const Loading = () => {
     const navigate = useNavigate()
     const isFinishedDelay = useDelay(3)
-    const { data } = useSeed()
+    const { data , error, isError} = useSeed()
+    useErrorHandler(error, isError)
 
     useEffect(() => {
         if (data && isFinishedDelay) {
-            console.log(data)
             navigate('Home')
         }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [data, isFinishedDelay])
 
 

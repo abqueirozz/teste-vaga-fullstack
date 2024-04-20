@@ -1,12 +1,13 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { Home, Loading, } from '../pages'
+import { Error, Home, Loading, } from '../pages'
 
 export const Router = () => {
     return (
         <BrowserRouter>
             <Routes>
-                <Route path="/" element={<Loading />} />
+                <Route index path="/*" element={<Loading />} />
                 <Route path="/home" element={<Home />} />
+                <Route path="/error" element={<Error />} />
 
             </Routes>
         </BrowserRouter>

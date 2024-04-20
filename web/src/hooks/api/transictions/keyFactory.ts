@@ -1,8 +1,7 @@
 export const transactionKeys = {
   useSeed: () =>[],
-  useGetTransactions: (page: string, filter: string[] = []) => [
+  useGetTransactions: (page: string) => [
     "transactions",
     page,
-    ...filter.sort(),
   ],
 };
