@@ -19,11 +19,8 @@ export const useErrorHandler = (
       if (error instanceof AxiosError) {
         errorMessage = error.response?.data["detail"];
       }
-      toast.error(errorMessage, {
-        onOpen() {
-          navigate("Error");
-        },
-      });
+      navigate("/Error");
+      toast.error(errorMessage);
     }
-  }, [isError, error]);
+  }, [isError, error, navigate]);
 };

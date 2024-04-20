@@ -13,7 +13,7 @@ function App() {
       <ThemeProvider>
         <Router />
       </ThemeProvider>
-        <ToastContainer limit={1}/>
+      <ToastContainer limit={1} />
     </QueryClientProvider>
   )
 }

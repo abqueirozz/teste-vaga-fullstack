@@ -15,34 +15,29 @@ import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-quartz.css";
 
 export const Table = () => {
-    const [rowData, setRowData] = useState<TransactionDataType[]>();
     // eslint-disable-next-line react-hooks/rules-of-hooks
+    const [rowData, setRowData] = useState<TransactionDataType[]>();
+    const [columnDefs,] = useState<ColDef[]>(columnsDef);
+
     const [filter, setFilter] = useAtom(filterAtom);
     const [state, dispatch] = useReducer(usePagination, { page: 1 });
 
-    const { data: res, isSuccess, refetch, isError, error } = useGetTransactions(String(1), filter)
-    useErrorHandler(error, isError)
-    useEffect(() => {
-        console.log('refatching')
-        refetch()
-    }, [filter, refetch])
-
     const containerStyle = useMemo(() => ({ width: "80%", height: "80%" }), []);
     const gridStyle = useMemo(() => ({ height: "100%", width: "100%" }), []);
+    const defaultColDef = useMemo<ColDef>(() => { return { width: 170, }; }, []);
 
-    const [columnDefs,] = useState<ColDef[]>(columnsDef);
+    const { data: res, isSuccess, refetch, isError, error } = useGetTransactions(String(state.page), filter)
+
+    useErrorHandler(error, isError)
+    useEffect(() => {
+        refetch()
+    }, [filter, refetch])
 
     useEffect(() => {
         if (isSuccess && res?.data)
             setRowData(() => res?.data.data)
     }, [isSuccess, res?.data])
 
-    const defaultColDef = useMemo<ColDef>(() => {
-        return {
-            width: 170,
-
-        };
-    }, []);
 
     const populateBadges = useMemo(() => {
         return Object.keys(filter).map((key) => {

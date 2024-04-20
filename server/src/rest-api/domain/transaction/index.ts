@@ -21,7 +21,7 @@ export async function getTransactions(req: Request, res: Response) {
 
 export function seed(req: Request, res: Response) {
   const createdData = transaction.seed();
-
+  
   if (!createdData) {
     res.status(200).send("Tabela já povoada");
     return;

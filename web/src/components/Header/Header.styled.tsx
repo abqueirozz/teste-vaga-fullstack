@@ -1,6 +1,8 @@
 import styled, { keyframes } from "styled-components";
 
-const translocate = keyframes`
+const IMG_SIZE= '60px'
+
+const scale_up = keyframes`
   from {
     transform: scale(0);
   }
@@ -21,17 +23,19 @@ gap: 8px;
 justify-content: space-between;
 
 `
+export const Icon = styled.img `
+height: ${IMG_SIZE};
+width: ${IMG_SIZE};
+margin: 8px 16px;
+`
 
-export const Icon = styled.img`
-height: 60px;
-width: 60px;
+export const MainIcon = styled.img`
+height: ${IMG_SIZE};
+width: ${IMG_SIZE};
+margin: 8px 16px;
 border: solid 3px rgba(0, 0, 0, 0.8);
 border-radius: 50%;
-animation: ${translocate} .8s linear;
+animation: ${scale_up} .8s linear;
 `
 
-export const Link = styled.a `
-height: 60px;
-width: 60px;
-`
 

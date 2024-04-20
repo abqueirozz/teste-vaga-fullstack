@@ -13,6 +13,7 @@ export interface PageState {
 
 export const usePagination = (state: PageState, action: PageAction) => {
     const { type } = action;
+    console.log(type)
     switch (type) {
         case PageActionType.INCREASE:
             return {
