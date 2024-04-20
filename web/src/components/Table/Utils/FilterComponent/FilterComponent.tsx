@@ -16,20 +16,20 @@ export const FilterComponent = ({ column, api }: FilterProps) => {
     const [, setFilter] = useAtom(filterAtom);
 
     const handleFilterSelect = () => {
-        if(textRef.current?.value )
+        if (textRef.current?.value)
             setFilter((prev) => ({ ...prev, [column.getColId()]: textRef.current?.value }))
         else
-        setFilter((prev) => ({ ...prev, [column.getColId()]: undefined}))
+            setFilter((prev) => ({ ...prev, [column.getColId()]: undefined }))
 
         api.destroyFilter(column)
     }
 
-    return (<>
+    return (
         <Styled.Container>
             <TextInput text={colName} ref={textRef} autoFocus />
             <Styled.ButtonContainer>
                 <Button onClick={handleFilterSelect}>Procurar</Button>
             </Styled.ButtonContainer>
         </Styled.Container>
-    </>)
+    )
 }
